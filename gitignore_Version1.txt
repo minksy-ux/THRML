@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+
+# Jupyter and Panel temp files
+.ipynb_checkpoints
+__panel_cache__/
+*.panel
+
+# Virtual environments
+env/
+venv/
+ENV/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Matplotlib figures
+*.png
+*.jpg
+*.jpeg
+*.pdf
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# pyproject
+.mypy_cache/
+.pytest_cache/

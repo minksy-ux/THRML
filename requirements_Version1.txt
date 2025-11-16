@@ -1,0 +1,6 @@
+thrml>=0.4.0
+jax>=0.4
+matplotlib>=3
+networkx>=3
+panel>=1.2
+plotly>=5
