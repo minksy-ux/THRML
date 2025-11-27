@@ -1,0 +1,39 @@
+bash$ insmod litmus_scheduler.ko device=/dev/thermo0
+$ echo 'litmus' > /sys/kernel/sched/policy model ProcessScheduler {
+    // Learn each process's characteristics
+    cpu_demand[N] ~ Exponential(1.0)
+    io_wait[N] ~ Exponential(0.5)
+    priority[N] ~ Normal(5.0, 2.0)
+    
+    // Make scheduling decisions
+    core_assignment[N] ~ Categorical(uniform)
+    time_slice[N] ~ Categorical([5ms, 10ms, 20ms, 50ms])
+    
+    // Physics-based constraints
+    factor load_balance { ... }
+    factor cache_affinity { ... }
+    factor priority_satisfaction { ... }
+}
+```
+
+## Why This is Revolutionary
+
+**Traditional schedulers:**
+- Hand-coded heuristics (nice values, load balancing rules)
+- Fixed policies (round-robin, priority queues)
+- Can't adapt to workload changes
+
+**Litmus scheduler:**
+- **Learns process behavior** from observations
+- **Optimizes globally** across all constraints simultaneously
+- **Adapts in real-time** — updates every 100ms
+- **Runs on thermodynamic chip** — 5ms compute budget for 1000 processes
+
+## The Energy Function
+
+All these competing goals become **one physics equation:**
+```
+Energy = load_imbalance²
+       + cache_migrations × memory_footprint
+       + (priority - time_slice)²
+       + memory_contention²
